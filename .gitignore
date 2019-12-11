@@ -60,4 +60,5 @@ typings/
 # VS Code config
 .vscode
 
-dist/*
+*/dist/*
+*/.cache
