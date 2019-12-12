@@ -3,6 +3,7 @@ import { AddressInfo } from 'net';
 import * as bodyParser from 'body-parser';
 
 const app = express();
+const db = require('../database/database.js')
 
 app.use(bodyParser.json());
 
