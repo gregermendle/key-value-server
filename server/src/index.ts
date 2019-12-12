@@ -3,7 +3,7 @@ import { AddressInfo } from 'net';
 import * as bodyParser from 'body-parser';
 
 const app = express();
-const db = require('../database/database.js')
+const db = require('../database/database.js');
 
 app.use(bodyParser.json());
 
@@ -13,11 +13,24 @@ app.post(`/store`, function(req, res) {
   console.log(req.body);
   
   const { key, value } = req.body;
-  //connect to database 
+  //connect to database
+  const sql = 'INSERT INTO keyValue (key, value) VALUES (?,?)'
+  const values = [key, value];
+  db.run(sql, values, function (err: object[], result: object) {
+    console.log(result, err);
+    
+      if (err) {
+        res.status(400).json({"error": err})
+        return;
+      } else {
+        res.json({
+          "message": 'success'
+        });
+      }
+  }) 
   //save to database
   //if successful message = sucessfully created
   //if duplicate message = key already exists
-  res.send({ message: 'successfully created' })
 });
 
 const server = app.listen(3000, () => {
