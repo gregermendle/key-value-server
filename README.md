@@ -15,8 +15,9 @@ To run the app:
 ./run_client
 ```
 
-### To-do
+# Requirements
 
-1. Setup key value storage endpoint
-2. Create sqlite database and store results
-3. Hook key value endpoint into `<Form />` component
+1. `POST` requests containing a `key` and `value` should be accepted at the `/store` endpoint
+2. `key` and `value` pairs should be unique and duplicate pairs should not exist in the database
+3. Users should be able to enter their key and value in a web browser via a form
+4. When a user enters a key-value pair that already exists, an error should be shown
