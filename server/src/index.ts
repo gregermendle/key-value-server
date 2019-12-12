@@ -3,7 +3,7 @@ import { AddressInfo } from 'net';
 
 const app = express();
 
-app.get('/set', () => {
+app.get('/store', () => {
   // Get key and value from query parameters here
 });
 
