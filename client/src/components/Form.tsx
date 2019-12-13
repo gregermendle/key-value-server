@@ -8,24 +8,28 @@ const Form = () => {
 
   const newInput = (key: string, value: string) => {
     //If key or value is empty, set message to both fields are required
-    const input = {
-      key, 
-      value
-    };
+    if(key === '' || value === '') {
+      setMessage('Both fields are required')
+    } else {
+      const input = {
+        key,
+        value
+      };
 
-    fetch('http://localhost:3000/store',
-      {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(input)
-      })
-      .then(response => response.json())
-      .then(result => setMessage(result.message))
-      .catch(err => console.log(err))
+      fetch('http://localhost:3000/store-key-values',
+        {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(input)
+        })
+        .then(response => response.json())
+        .then(result => setMessage(result.message))
+        .catch(err => console.log(err))
+    }
   }
-  
+    
   const submitForm = React.useCallback(() => {
       // Submit form logic here
       newInput(keyInput, valueInput)
@@ -36,7 +40,6 @@ const Form = () => {
 
   return (
     <div>
-      {message}
       <label>Key:</label>
       <input
         placeholder="Key" 
@@ -50,6 +53,7 @@ const Form = () => {
         value={valueInput}
       />
       <button onClick={submitForm}>Submit</button>
+      {message}
     </div>
   );
 };
